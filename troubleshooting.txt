@@ -1,0 +1,60 @@
+Activity 5: Git Mastery and Troubleshooting
+Part 2: Troubleshooting and Emergency Fixes
+Name: Meynard Mosquito
+
+1. The "Oops, wrong file" Problem
+Command:
+git restore --staged .env
+Another way to do it is git reset HEAD .env
+Explanation: This takes .env out of the staging area but keeps the file and its changes on my computer, so the passwords are not committed.
+
+2. The "Typo in the message" Problem
+Command:
+git commit --amend -m "Fixed authentication typo"
+Explanation: This rewrites the message of the latest commit instead of making a new one. It is safe because I have not pushed yet.
+
+3. The "Forgot a file" Problem
+Commands:
+git add styles.css
+git commit --amend --no-edit
+Explanation: I stage the forgotten styles.css first, then the amend adds it to the previous commit. The --no-edit part keeps the same commit message.
+
+4. The "I hate these changes" Problem
+Command:
+git restore index.html
+Another way to do it is git checkout -- index.html
+Explanation: This throws away all my unsaved changes in index.html and brings it back to how it looked in the last commit.
+
+5. The "Wrong Branch" Problem
+Commands:
+git branch new-feature
+git reset HEAD~3 --hard
+git checkout new-feature
+Explanation: First I make a new branch that points to my 3 commits so they are saved. Then I move main back by 3 commits with the hard reset. Last, I switch to the new branch to continue working.
+
+6. The "Detached HEAD" Problem
+Command:
+git switch -c recovery-branch
+Another way to do it is git checkout -b recovery-branch
+Explanation: This creates a branch right where I am, so the commits I made in detached HEAD are saved and will not get lost when I go back to main.
+
+7. The "Undo a pushed mistake" Problem
+Command:
+git revert <buggy-commit-hash>
+Explanation: Revert makes a new commit that does the opposite of the buggy commit. The history stays the same, so it is safe for a shared repository.
+
+8. The "Accidental Deletion" Problem
+Command:
+git branch <deleted-branch-name> <commit-hash>
+Explanation: I run git reflog first to find the last commit hash of the deleted branch. Then this command creates the branch again at that commit.
+
+9. The "Ghost Files" Problem
+Command:
+git add -u
+Another way to do it is git rm <filename>
+Explanation: This tells Git to record the files I deleted from File Explorer and stage the deletions for the next commit.
+
+10. The "Pushed to the void" Problem
+Command:
+git push origin --delete testing-junk
+Explanation: This deletes the testing-junk branch from the remote GitHub repository straight from the terminal.
